@@ -1,5 +1,4 @@
 from gym.core import Wrapper
-import minerl.env.spaces as spaces
 import numpy as np
 from copy import deepcopy
 
@@ -12,7 +11,9 @@ class DummyMinecraft:
 
     def __init__(self):
         self.state = {
-            'equipped_items': {'mainhand': {'damage': 0, 'maxDamage': 0, 'type': 0}},
+            "equipped_items.mainhand.damage": 0,
+            "equipped_items.mainhand.maxDamage": 0,
+            "equipped_items.mainhand.type": 0,
             'inventory': {'coal': 0,
                           'cobblestone': 0,
                           'crafting_table': 0,
@@ -34,50 +35,47 @@ class DummyMinecraft:
             'pov': np.full([64, 64, 3], 127, dtype=np.uint8)}
 
         self.action_space = {
-            'attack': spaces.Discrete(2),
-            'back': spaces.Discrete(2),
-            'camera': spaces.Box(np.full([2], -1), np.full([2], 1)),
-            'craft': spaces.Enum('none', 'torch', 'stick', 'planks', 'crafting_table'),
-            'equip': spaces.Enum('none', 'air', 'wooden_axe', 'wooden_pickaxe', 'stone_axe',
-                                 'stone_pickaxe', 'iron_axe', 'iron_pickaxe'),
-            'forward': spaces.Discrete(2),
-            'jump': spaces.Discrete(2),
-            'left': spaces.Discrete(2),
-            'nearbyCraft': spaces.Enum('none', 'wooden_axe', 'wooden_pickaxe', 'stone_axe',
-                                       'stone_pickaxe', 'iron_axe', 'iron_pickaxe', 'furnace'),
-            'nearbySmelt': spaces.Enum('none', 'iron_ingot', 'coal'),
-            'place': spaces.Enum('none', 'dirt', 'stone', 'cobblestone', 'crafting_table', 'furnace', 'torch'),
-            'right': spaces.Discrete(2),
-            'sneak': spaces.Discrete(2),
-            'sprint': spaces.Discrete(2)}
+            'attack': "Discrete(2)",
+            'back': "Discrete(2)",
+            'camera': "Box(np.full([2], -1), np.full([2], 1))",
+            'craft': "Enum('none', 'torch', 'stick', 'planks', 'crafting_table')",
+            'equip': "Enum('none', 'air', 'wooden_axe', 'wooden_pickaxe', 'stone_axe', 'stone_pickaxe', 'iron_axe', 'iron_pickaxe')",
+            'forward': "Discrete(2)",
+            'jump': "Discrete(2)",
+            'left': "Discrete(2)",
+            'nearbyCraft': "Enum('none', 'wooden_axe', 'wooden_pickaxe', 'stone_axe', 'stone_pickaxe', 'iron_axe', 'iron_pickaxe', 'furnace')",
+            'nearbySmelt': "Enum('none', 'iron_ingot', 'coal')",
+            'place': "Enum('none', 'dirt', 'stone', 'cobblestone', 'crafting_table', 'furnace', 'torch')",
+            'right': "Discrete(2)",
+            'sneak': "Discrete(2)",
+            'sprint': "Discrete(2)"}
 
         self.observation_space = {
             'equipped_items': {
                 'mainhand': {
-                    'damage': spaces.Box(np.full([2], -1), np.full([2], 1), dtype=np.int64),
-                    'maxDamage': spaces.Box(np.full([2], -1), np.full([2], 1), dtype=np.int64),
-                    'type': spaces.Enum('none', 'air', 'wooden_axe', 'wooden_pickaxe', 'stone_axe', 'stone_pickaxe',
-                                        'iron_axe', 'iron_pickaxe', 'other')}},
+                    'damage': "Box(np.full([2], -1), np.full([2], 1), dtype=np.int64)",
+                    'maxDamage': "Box(np.full([2], -1), np.full([2], 1), dtype=np.int64)",
+                    'type': "Enum('none', 'air', 'wooden_axe', 'wooden_pickaxe', 'stone_axe', 'stone_pickaxe', 'iron_axe', 'iron_pickaxe', 'other')"}},
             'inventory': {
-                'coal': spaces.Box(np.full([1], -1), np.full([1], 1), dtype=np.int64),
-                'cobblestone': spaces.Box(np.full([1], -1), np.full([1], 1), dtype=np.int64),
-                'crafting_table': spaces.Box(np.full([1], -1), np.full([1], 1), dtype=np.int64),
-                'dirt': spaces.Box(np.full([1], -1), np.full([1], 1), dtype=np.int64),
-                'furnace': spaces.Box(np.full([1], -1), np.full([1], 1), dtype=np.int64),
-                'iron_axe': spaces.Box(np.full([1], -1), np.full([1], 1), dtype=np.int64),
-                'iron_ingot': spaces.Box(np.full([1], -1), np.full([1], 1), dtype=np.int64),
-                'iron_ore': spaces.Box(np.full([1], -1), np.full([1], 1), dtype=np.int64),
-                'iron_pickaxe': spaces.Box(np.full([1], -1), np.full([1], 1), dtype=np.int64),
-                'log': spaces.Box(np.full([1], -1), np.full([1], -1), dtype=np.int64),
-                'planks': spaces.Box(np.full([1], -1), np.full([1], -1), dtype=np.int64),
-                'stick': spaces.Box(np.full([1], -1), np.full([1], -1), dtype=np.int64),
-                'stone': spaces.Box(np.full([1], -1), np.full([1], -1), dtype=np.int64),
-                'stone_axe': spaces.Box(np.full([1], -1), np.full([1], -1), dtype=np.int64),
-                'stone_pickaxe': spaces.Box(np.full([1], -1), np.full([1], -1), dtype=np.int64),
-                'torch': spaces.Box(np.full([1], -1), np.full([1], -1), dtype=np.int64),
-                'wooden_axe': spaces.Box(np.full([1], -1), np.full([1], -1), dtype=np.int64),
-                'wooden_pickaxe': spaces.Box(np.full([1], -1), np.full([1], -1), dtype=np.int64)},
-            'pov': spaces.Box(np.full([64, 64, 3], -1), np.full([64, 64, 3], -1), dtype=np.uint8)}
+                'coal': "Box(np.full([1], -1), np.full([1], 1), dtype=np.int64)",
+                'cobblestone': "Box(np.full([1], -1), np.full([1], 1), dtype=np.int64)",
+                'crafting_table': "Box(np.full([1], -1), np.full([1], 1), dtype=np.int64)",
+                'dirt': "Box(np.full([1], -1), np.full([1], 1), dtype=np.int64)",
+                'furnace': "Box(np.full([1], -1), np.full([1], 1), dtype=np.int64)",
+                'iron_axe': "Box(np.full([1], -1), np.full([1], 1), dtype=np.int64)",
+                'iron_ingot': "Box(np.full([1], -1), np.full([1], 1), dtype=np.int64)",
+                'iron_ore': "Box(np.full([1], -1), np.full([1], 1), dtype=np.int64)",
+                'iron_pickaxe': "Box(np.full([1], -1), np.full([1], 1), dtype=np.int64)",
+                'log': "Box(np.full([1], -1), np.full([1], -1), dtype=np.int64)",
+                'planks': "Box(np.full([1], -1), np.full([1], -1), dtype=np.int64)",
+                'stick': "Box(np.full([1], -1), np.full([1], -1), dtype=np.int64)",
+                'stone': "Box(np.full([1], -1), np.full([1], -1), dtype=np.int64)",
+                'stone_axe': "Box(np.full([1], -1), np.full([1], -1), dtype=np.int64)",
+                'stone_pickaxe': "Box(np.full([1], -1), np.full([1], -1), dtype=np.int64)",
+                'torch': "Box(np.full([1], -1), np.full([1], -1), dtype=np.int64)",
+                'wooden_axe': "Box(np.full([1], -1), np.full([1], -1), dtype=np.int64)",
+                'wooden_pickaxe': "Box(np.full([1], -1), np.full([1], -1), dtype=np.int64)"},
+            'pov': "Box(np.full([64, 64, 3], -1), np.full([64, 64, 3], -1), dtype=np.uint8)"}
 
         self.reward_range = (-np.inf, np.inf)
         self.metadata = {'render.modes': ['rgb_array', 'human']}

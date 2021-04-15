@@ -26,7 +26,7 @@ class StateManager:
 
     def get_img_vec(self, state):
         img = state['pov']
-        item_type = state['equipped_items']['mainhand']['type']
+        item_type = state['equipped_items.mainhand.type']
         if item_type in self.item_list:
             item_id = self.item_list.index(item_type)
         else:
