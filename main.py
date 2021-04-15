@@ -79,7 +79,7 @@ def get_args(raw_args=None):
     parser.add_argument('--eval_policy_model_id', type=str, default="last")
     parser.add_argument('--eval_policy_episodes', type=int, default=100)
 
-    parser.add_argument('--add_treechop_data', type=str2bool, default=True,
+    parser.add_argument('--add_treechop_data', type=str2bool, default=False,
                         help="Set to true to create a dataset with additional Treechop trajectories")
 
     parser.add_argument('--test', type=str2bool, default=False, help="for debugging")
@@ -89,6 +89,10 @@ def get_args(raw_args=None):
                              "Will save tmp snapshot after the time limit is over."
                              "Starting a training run with identical logdir will "
                              "continue the training from the tmp snapshot.")
+    parser.add_argument('--add_obtain_ironpickaxe', type=str2bool, default=False,
+                        help="Set to true to create a dataset with IronPickaxe trajectories")
+    parser.add_argument('--add_obtain_diamond', type=str2bool, default=False,
+                        help="Set to true to create a dataset with ObtainDiamond trajectories")
 
     return parser.parse_args(raw_args)
 
@@ -208,21 +212,23 @@ def rl(args):
                 max_iron_pickaxe_duration = None
                 max_diamond_duration = None
 
-            put_data_into_dataset(
-                'MineRLObtainIronPickaxe-v0', action_manager, dataset, args.minecraft_human_data_dir,
-                args.dataset_continuous_action_stacking,
-                args.dataset_only_successful,
-                max_iron_pickaxe_duration,
-                args.dataset_max_reward,
-                args.test)
+            if args.add_obtain_ironpickaxe:
+                put_data_into_dataset(
+                    'MineRLObtainIronPickaxe-v0', action_manager, dataset, args.minecraft_human_data_dir,
+                    args.dataset_continuous_action_stacking,
+                    args.dataset_only_successful,
+                    max_iron_pickaxe_duration,
+                    args.dataset_max_reward,
+                    args.test)
 
-            put_data_into_dataset(
-                'MineRLObtainDiamond-v0', action_manager, dataset, args.minecraft_human_data_dir,
-                args.dataset_continuous_action_stacking,
-                args.dataset_only_successful,
-                max_diamond_duration,
-                args.dataset_max_reward,
-                args.test)
+            if args.add_obtain_diamond:
+                put_data_into_dataset(
+                    'MineRLObtainDiamond-v0', action_manager, dataset, args.minecraft_human_data_dir,
+                    args.dataset_continuous_action_stacking,
+                    args.dataset_only_successful,
+                    max_diamond_duration,
+                    args.dataset_max_reward,
+                    args.test)
 
             if args.add_treechop_data:
                 put_data_into_dataset(

@@ -106,6 +106,7 @@ def put_data_into_dataset(env_name, action_manager, dataset, minecraft_human_dat
     data = minerl.data.make(env_name, data_dir=minecraft_human_data_dir)
     trajs = data.get_trajectory_names()
 
+
     # the ring buffer is used to stack the camera action of multiple consecutive states:
     sample_que = deque(maxlen=continuous_action_stacking_amount)
 
