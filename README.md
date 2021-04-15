@@ -1,5 +1,7 @@
 # Scaling Imitation Learning in Minecraft
 
+** Adding support for minerl==0.3.6 - work in progress **
+
 **[Accompanying technical report link](https://arxiv.org/abs/2007.02701)**
 
 Code for imitation learning of the [MineRL](https://minerl.io/) `MineRLObtainDiamond-v0` task. 
