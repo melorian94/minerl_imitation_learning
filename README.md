@@ -13,7 +13,7 @@ The implementation is partly based on [Kaixhin's Pytorch implementation of Rainb
 ## Dependencies:
 
 **Tested with:**
-* minerl==0.2.9
+* minerl==0.3.6
 * torch==1.2.0
 
 ## Training:
@@ -29,12 +29,14 @@ Creating a dataset from the MineRL human data:
 `add_obtain_diamond` and `add_obtain_ironpickaxe` allow partial transformation; needed if limited computational resources available.
 
 
+
 If `quit_after_saving_dataset` is set to false, training will start after the dataset creation.
 Otherwise training can be started by running:
 
     python main.py --logdir <PATH_TO_LOG_DATA_FOLDER> --dataset_path <PATH_TO_DATASET>
     
 The training will save snapshots into the log folder (every 100,000 train steps). Last snapshot will have an id of 'last'.
+
 
 ## Evaluation:
 
