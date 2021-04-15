@@ -15,6 +15,7 @@ The implementation is partly based on [Kaixhin's Pytorch implementation of Rainb
 **Tested with:**
 * minerl==0.3.6
 * torch==1.2.0
+* python==3.6.13
 
 ## Training:
 
@@ -22,7 +23,7 @@ Creating a dataset from the MineRL human data:
 
     python main.py --logdir <PATH_TO_LOG_DATA_FOLDER> --save_dataset_path <DATASET_WILL_BE_SAVED_HERE> --minecraft_human_data_dir <PATH_TO_MineRL_DATA> --quit_after_saving_dataset True --add_obtain_ironpickaxe True --add_obtain_diamond True
 
-`save_dataset_path` requires a path together with the future dataset name - directory must exist in advance. 
+`save_dataset_path` requires a path together with the future dataset name - e.g. /PATH/my-dataset.pickle
 
 `minecraft_human_data_dir` requires the path to the human data folder - downloaded from minerl.io or with minerl.data.download
 
