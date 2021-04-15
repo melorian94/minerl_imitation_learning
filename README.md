@@ -1,6 +1,6 @@
 # Scaling Imitation Learning in Minecraft
 
-** Adding support for minerl==0.3.6 - work in progress **
+# ** Adding support for minerl==0.3.6 - work in progress
 
 **[Accompanying technical report link](https://arxiv.org/abs/2007.02701)**
 
@@ -13,24 +13,30 @@ The implementation is partly based on [Kaixhin's Pytorch implementation of Rainb
 ## Dependencies:
 
 **Tested with:**
-* minerl==0.2.9
+* minerl==0.3.6
 * torch==1.2.0
 
 ## Training:
 
 Creating a dataset from the MineRL human data:
 
-    python main.py --logdir <PATH_TO_LOG_DATA_FOLDER> --save_dataset_path <DATASET_WILL_BE_SAVED_HERE> --minecraft_human_data_dir <PATH_TO_MineRL_DATA> --quit_after_saving_dataset True
+    python main.py --logdir <PATH_TO_LOG_DATA_FOLDER> --save_dataset_path <DATASET_WILL_BE_SAVED_HERE> --minecraft_human_data_dir <PATH_TO_MineRL_DATA> --quit_after_saving_dataset True --add_obtain_ironpickaxe True --add_obtain_diamond True
 
-`save_dataset_path` requires a path together with the future dataset name. `minecraft_human_data_dir` requires the path to the human data folder.
+`save_dataset_path` requires a path together with the future dataset name - directory must exist in advance. 
+
+`minecraft_human_data_dir` requires the path to the human data folder - downloaded from minerl.io or with minerl.data.download
+
+`add_obtain_diamond` and `add_obtain_ironpickaxe` allow partial transformation; needed if limited computational resources available.
+
+
 
 If `quit_after_saving_dataset` is set to false, training will start after the dataset creation.
-
 Otherwise training can be started by running:
 
     python main.py --logdir <PATH_TO_LOG_DATA_FOLDER> --dataset_path <PATH_TO_DATASET>
     
 The training will save snapshots into the log folder (every 100,000 train steps). Last snapshot will have an id of 'last'.
+
 
 ## Evaluation:
 
