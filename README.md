@@ -1,6 +1,6 @@
 # Scaling Imitation Learning in Minecraft
 
-# ** Adding support for minerl==0.3.6 - work in progress **
+# ** Adding support for minerl==0.3.6 - work in progress
 
 **[Accompanying technical report link](https://arxiv.org/abs/2007.02701)**
 
