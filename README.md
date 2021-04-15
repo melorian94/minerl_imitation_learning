@@ -23,7 +23,9 @@ Creating a dataset from the MineRL human data:
     python main.py --logdir <PATH_TO_LOG_DATA_FOLDER> --save_dataset_path <DATASET_WILL_BE_SAVED_HERE> --minecraft_human_data_dir <PATH_TO_MineRL_DATA> --quit_after_saving_dataset True --add_obtain_ironpickaxe True --add_obtain_diamond True
 
 `save_dataset_path` requires a path together with the future dataset name - directory must exist in advance. 
+
 `minecraft_human_data_dir` requires the path to the human data folder - downloaded from minerl.io or with minerl.data.download
+
 `add_obtain_diamond` and `add_obtain_ironpickaxe` allow partial transformation; needed if limited computational resources available.
 
 
